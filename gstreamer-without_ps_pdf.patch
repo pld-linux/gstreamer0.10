@@ -1,0 +1,20 @@
+--- gstreamer-0.10.1/common/m4/gst-doc.m4.orig	2005-11-27 15:19:38.000000000 +0100
++++ gstreamer-0.10.1/common/m4/gst-doc.m4	2006-01-14 13:55:40.223307250 +0100
+@@ -8,6 +8,9 @@
+   AC_HELP_STRING([--enable-docbook],
+                  [use docbook to build documentation [default=no]]),,
+                  enable_docbook=no)
++  AC_ARG_ENABLE(pspdf,
++  AC_HELP_STRING([--disable-pspdf],
++                 [disable building of documentation in PS and PDF formats]),,enable_pspdf=yes)
+ 
+   have_docbook=no
+ 
+@@ -100,6 +103,7 @@
+     dnl check if we can generate PS
+     if test "x$HAVE_DOCBOOK2PS" = "xyes" && \
+        test "x$enable_docbook" = "xyes" && \
++       test "x$enable_pspdf" = "xyes" && \
+        test "x$HAVE_XMLLINT" = "xyes" && \
+        test "x$HAVE_JADETEX" = "xyes" && \
+        test "x$HAVE_FIG2DEV_EPS" = "xyes" && \

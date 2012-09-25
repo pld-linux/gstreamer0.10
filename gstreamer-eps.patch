@@ -1,0 +1,37 @@
+--- gstreamer-0.10.1/docs/image-eps.orig	2003-10-08 16:34:06.000000000 +0200
++++ gstreamer-0.10.1/docs/image-eps	2006-01-14 13:35:25.683403250 +0100
+@@ -1,2 +1,2 @@
+-<!ENTITY image "ps">
++<!ENTITY image "eps">
+ <!ENTITY IMAGE "EPS">
+--- gstreamer-0.10.1/docs/manuals.mak.orig	2005-05-02 13:47:15.000000000 +0200
++++ gstreamer-0.10.1/docs/manuals.mak	2006-01-14 13:37:01.545394250 +0100
+@@ -11,8 +11,8 @@
+ 
+ # PNG's can be source or built from .fig
+ PNG = $(strip $(PNG_SRC) $(FIG_SRC:.fig=.png))
+-# EPS .ps files can be built from .png or .fig
+-EPS = $(strip $(FIG_SRC:.fig=.ps) $(PNG_SRC:.png=.ps))
++# EPS .eps files can be built from .png or .fig
++EPS = $(strip $(FIG_SRC:.fig=.eps) $(PNG_SRC:.png=.eps))
+ # PDF .pdf files can be built from .png or .fig
+ PDF = $(strip $(FIG_SRC:.fig=.pdf) $(PNG_SRC:.png=.pdf))
+ 
+@@ -140,7 +140,7 @@
+ 	@fig2dev -Lpng $< $@
+ 
+ # make ps(EPS) from fig
+-$(BUILDIMAGESDIR)/%.ps: %.fig
++$(BUILDIMAGESDIR)/%.eps: %.fig
+ 	@echo "Generating $@ from $<"
+ 	@mkdir -p $(BUILDIMAGESDIR)
+ 	@fig2dev -Leps $< $@
+@@ -158,7 +158,7 @@
+ 	@cat $< | pngtopnm | pnmtops -noturn 2> /dev/null | epstopdf --filter --outfile $@ 2> /dev/null
+ 
+ # make ps(EPS) from png
+-$(BUILDIMAGESDIR)/%.ps: %.png
++$(BUILDIMAGESDIR)/%.eps: %.png
+ 	@echo "Generating $@ from $<"
+ 	@mkdir -p $(BUILDIMAGESDIR)
+ 	@cat $< | pngtopnm | pnmtops -noturn > $@ 2> /dev/null
