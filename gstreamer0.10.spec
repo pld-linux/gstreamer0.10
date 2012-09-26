@@ -1,6 +1,6 @@
 Summary:	GStreamer Streaming-media framework runtime
 Summary(pl.UTF-8):	GStreamer - biblioteki środowiska do obróbki strumieni
-Name:		gstreamer0
+Name:		gstreamer0.10
 Version:	0.10.36
 Release:	4
 License:	LGPL v2+
