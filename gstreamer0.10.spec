@@ -7,7 +7,6 @@ License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
 # Source0-md5:	15389c73e091b1dda915279c388b9cb2
-Source1:	gstreamer-rpmdeps.sh
 Patch0:		gstreamer-without_ps_pdf.patch
 Patch1:		gstreamer-eps.patch
 Patch2:		gstreamer-inspect-rpm-format.patch
@@ -38,11 +37,11 @@ BuildRequires:	xz
 Requires:	glib2 >= 1:2.24
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		__gst_inspect	%{_bindir}/gst-inspect-0.10
+
 %define		vmajor		%(echo %{version} | cut -d. -f1,2)
 %define		_gstlibdir	%{_libdir}/gstreamer-%{vmajor}
 %define		_gstincludedir	%{_includedir}/gstreamer-%{vmajor}
-
-%define		rpmlibdir	/usr/lib/rpm
 
 %description
 GStreamer is a streaming-media framework, based on graphs of filters
@@ -133,8 +132,6 @@ install -d $RPM_BUILD_ROOT{%{_docdir}/gstreamer-devel-%{version},%{rpmlibdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{rpmlibdir}/gstreamerdeps.sh
-
 mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-{%{vmajor},%{version}}
 mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-%{version}/{manual,pwg} \
 	$RPM_BUILD_ROOT%{_docdir}/gstreamer-devel-%{version}
@@ -201,7 +198,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/gstreamer-dataprotocol-0.10.pc
 %{_pkgconfigdir}/gstreamer-net-0.10.pc
 %{_aclocaldir}/gst-element-check-0.10.m4
-%attr(755,root,root) %{rpmlibdir}/gstreamerdeps.sh
 %{_datadir}/gir-1.0/Gst-0.10.gir
 %{_datadir}/gir-1.0/GstBase-0.10.gir
 %{_datadir}/gir-1.0/GstCheck-0.10.gir
