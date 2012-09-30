@@ -133,7 +133,7 @@ install -d $RPM_BUILD_ROOT{%{_docdir}/gstreamer-devel-%{version},%{rpmlibdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-{%{vmajor},%{version}}
-mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-%{version}/{manual,pwg} \
+mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-%{version}/{faq,manual,pwg} \
 	$RPM_BUILD_ROOT%{_docdir}/gstreamer-devel-%{version}
 
 %find_lang gstreamer --all-name --with-gnome
@@ -151,7 +151,20 @@ rm -rf $RPM_BUILD_ROOT
 %files -f gstreamer.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/gst-*
+# generic launchers
+%attr(755,root,root) %{_bindir}/gst-feedback
+%attr(755,root,root) %{_bindir}/gst-inspect
+%attr(755,root,root) %{_bindir}/gst-launch
+%attr(755,root,root) %{_bindir}/gst-typefind
+%attr(755,root,root) %{_bindir}/gst-xmlinspect
+%attr(755,root,root) %{_bindir}/gst-xmllaunch
+# versioned
+%attr(755,root,root) %{_bindir}/gst-feedback-0.10
+%attr(755,root,root) %{_bindir}/gst-inspect-0.10
+%attr(755,root,root) %{_bindir}/gst-launch-0.10
+%attr(755,root,root) %{_bindir}/gst-typefind-0.10
+%attr(755,root,root) %{_bindir}/gst-xmlinspect-0.10
+%attr(755,root,root) %{_bindir}/gst-xmllaunch-0.10
 %attr(755,root,root) %{_libdir}/libgstbase-0.10.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstbase-0.10.so.0
 %attr(755,root,root) %{_libdir}/libgstcheck-0.10.so.*.*.*
@@ -168,7 +181,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_gstlibdir}/gst-plugin-scanner
 %attr(755,root,root) %{_gstlibdir}/libgstcoreelements.so
 %attr(755,root,root) %{_gstlibdir}/libgstcoreindexers.so
-%{_mandir}/man1/gst-*.1*
+%{_mandir}/man1/gst-feedback-0.10.1*
+%{_mandir}/man1/gst-inspect-0.10.1*
+%{_mandir}/man1/gst-launch-0.10.1*
+%{_mandir}/man1/gst-typefind-0.10.1*
+%{_mandir}/man1/gst-xmlinspect-0.10.1*
+%{_mandir}/man1/gst-xmllaunch-0.10.1*
 %{_libdir}/girepository-1.0/Gst-0.10.typelib
 %{_libdir}/girepository-1.0/GstBase-0.10.typelib
 %{_libdir}/girepository-1.0/GstCheck-0.10.typelib
