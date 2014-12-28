@@ -18,7 +18,7 @@ BuildRequires:	docbook-dtd30-sgml
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	docbook-utils >= 0.6.10
 BuildRequires:	flex >= 2.5.31
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.24
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-doc-tools
