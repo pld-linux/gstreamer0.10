@@ -10,6 +10,7 @@ Source0:	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar
 Patch0:		gstreamer-without_ps_pdf.patch
 Patch1:		gstreamer-eps.patch
 Patch2:		gstreamer-inspect-rpm-format.patch
+Patch3:		bison3.patch
 URL:		http://gstreamer.net/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.11
@@ -105,6 +106,7 @@ Dokumentacja API Gstreamera.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 # po/Makefile.in.in is modified
