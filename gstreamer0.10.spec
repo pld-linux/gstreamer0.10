@@ -2,7 +2,7 @@ Summary:	GStreamer Streaming-media framework runtime
 Summary(pl.UTF-8):	GStreamer - biblioteki środowiska do obróbki strumieni
 Name:		gstreamer0.10
 Version:	0.10.36
-Release:	8
+Release:	8.1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
@@ -24,7 +24,6 @@ BuildRequires:	glib2-devel >= 1:2.24
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-doc-tools
 BuildRequires:	gobject-introspection-devel >= 0.6.8
-BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	libtool >= 1.4
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	nasm
@@ -93,7 +92,6 @@ Statyczne wersje bibliotek GStreamer.
 Summary:	GStreamer API documentation
 Summary(pl.UTF-8):	Dokumentacja API Gstreamera
 Group:		Documentation
-Requires:	gtk-doc-common
 %if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
 %endif
@@ -125,7 +123,6 @@ Dokumentacja API Gstreamera.
 	--disable-silent-rules \
 	--disable-tests \
 	--enable-docbook \
-	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
