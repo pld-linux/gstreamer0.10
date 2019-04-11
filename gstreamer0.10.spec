@@ -2,7 +2,7 @@ Summary:	GStreamer Streaming-media framework runtime
 Summary(pl.UTF-8):	GStreamer - biblioteki środowiska do obróbki strumieni
 Name:		gstreamer0.10
 Version:	0.10.36
-Release:	10
+Release:	11
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
@@ -40,8 +40,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		__gst_inspect	%{_bindir}/gst-inspect-0.10
 
 %define		vmajor		%(echo %{version} | cut -d. -f1,2)
-%define		_gstlibdir	%{_libdir}/gstreamer-%{vmajor}
-%define		_gstincludedir	%{_includedir}/gstreamer-%{vmajor}
+%define		gstlibdir	%{_libdir}/gstreamer-%{vmajor}
+%define		gstlibexecdir	%{_libexecdir}/gstreamer-%{vmajor}
+%define		gstincludedir	%{_includedir}/gstreamer-%{vmajor}
 
 %description
 GStreamer is a streaming-media framework, based on graphs of filters
@@ -123,8 +124,7 @@ Dokumentacja API Gstreamera.
 	--disable-silent-rules \
 	--disable-tests \
 	--enable-docbook \
-	--with-html-dir=%{_gtkdocdir} \
-	--libexecdir=%{_libdir}
+	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
 
@@ -135,15 +135,16 @@ install -d $RPM_BUILD_ROOT{%{_docdir}/gstreamer-devel-%{version},%{rpmlibdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-{%{vmajor},%{version}}
-mv $RPM_BUILD_ROOT%{_docdir}/gstreamer-%{version}/{faq,manual,pwg} \
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/gstreamer-{%{vmajor},%{version}}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/gstreamer-%{version}/{faq,manual,pwg} \
 	$RPM_BUILD_ROOT%{_docdir}/gstreamer-devel-%{version}
 
 %find_lang gstreamer --all-name --with-gnome
 
 # no *.la for modules - shut up check files
-%{__rm} $RPM_BUILD_ROOT%{_gstlibdir}/lib*.la
-# *.la for libs kept - no .private dependencies in *.pc
+%{__rm} $RPM_BUILD_ROOT%{gstlibdir}/lib*.la
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgst*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -180,10 +181,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgstnet-0.10.so.0
 %attr(755,root,root) %{_libdir}/libgstreamer-0.10.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstreamer-0.10.so.0
-%dir %{_gstlibdir}
-%attr(755,root,root) %{_gstlibdir}/gst-plugin-scanner
-%attr(755,root,root) %{_gstlibdir}/libgstcoreelements.so
-%attr(755,root,root) %{_gstlibdir}/libgstcoreindexers.so
+%if "%{gstlibexecdir}" != "%{gstlibdir}"
+%dir %{gstlibexecdir}
+%endif
+%attr(755,root,root) %{gstlibexecdir}/gst-plugin-scanner
+%dir %{gstlibdir}
+%attr(755,root,root) %{gstlibdir}/libgstcoreelements.so
+%attr(755,root,root) %{gstlibdir}/libgstcoreindexers.so
 %{_mandir}/man1/gst-feedback-0.10.1*
 %{_mandir}/man1/gst-inspect-0.10.1*
 %{_mandir}/man1/gst-launch-0.10.1*
@@ -204,14 +208,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgstdataprotocol-0.10.so
 %attr(755,root,root) %{_libdir}/libgstnet-0.10.so
 %attr(755,root,root) %{_libdir}/libgstreamer-0.10.so
-%{_libdir}/libgstbase-0.10.la
-%{_libdir}/libgstcheck-0.10.la
-%{_libdir}/libgstcontroller-0.10.la
-%{_libdir}/libgstdataprotocol-0.10.la
-%{_libdir}/libgstnet-0.10.la
-%{_libdir}/libgstreamer-0.10.la
 %{_docdir}/gstreamer-devel-%{version}
-%{_gstincludedir}
+%dir %{gstincludedir}
+%{gstincludedir}/gst
 %{_pkgconfigdir}/gstreamer-0.10.pc
 %{_pkgconfigdir}/gstreamer-base-0.10.pc
 %{_pkgconfigdir}/gstreamer-check-0.10.pc
