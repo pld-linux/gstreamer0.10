@@ -93,9 +93,7 @@ Statyczne wersje bibliotek GStreamer.
 Summary:	GStreamer API documentation
 Summary(pl.UTF-8):	Dokumentacja API Gstreamera
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 GStreamer API documentation.
