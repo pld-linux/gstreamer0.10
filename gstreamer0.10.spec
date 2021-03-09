@@ -5,7 +5,7 @@ Version:	0.10.36
 Release:	11
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
+Source0:	https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-%{version}.tar.xz
 # Source0-md5:	15389c73e091b1dda915279c388b9cb2
 Patch0:		gstreamer-without_ps_pdf.patch
 Patch1:		gstreamer-eps.patch
@@ -30,6 +30,7 @@ BuildRequires:	nasm
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	python >= 2.1
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	transfig
 BuildRequires:	xmlto
