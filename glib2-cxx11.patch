@@ -1,0 +1,11 @@
+--- gstreamer-0.10.36/gst/gstutils.h~	2011-12-30 02:14:35.000000000 +0100
++++ gstreamer-0.10.36/gst/gstutils.h	2021-10-24 23:52:43.922687886 +0200
+@@ -136,7 +136,7 @@
+   /* The typedef for GType may be gulong or gsize, depending on the	\
+    * system and whether the compiler is c++ or not. The g_once_init_*	\
+    * functions always take a gsize * though ... */			\
+-  static volatile gsize gonce_data = 0;					\
++  static gsize gonce_data = 0;					\
+   if (g_once_init_enter (&gonce_data)) {				\
+     GType _type;							\
+     _type = gst_type_register_static_full (parent_type_macro,           \
